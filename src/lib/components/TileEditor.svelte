@@ -5,13 +5,49 @@
 
     let _p5: p5;
 
+    type TileTmp = {
+        size: number;
+        pixels: number[];
+    };
+
+    const SIZE = 5;
+    const tile: TileTmp = {
+        size: SIZE,
+        pixels: new Array(SIZE * SIZE).fill(0).map((n) => (Math.random() < 0.5 ? 0 : 1))
+    };
+
+    const screenSize = 500;
+    const scale = screenSize / tile.size;
+
+    const togglePixel = (x: number, y: number) => {
+        const index = tile.size * y + x;
+        tile.pixels[index] = tile.pixels[index] === 0 ? 1 : 0;
+    };
+    const fillPixels = (color: number) => {
+        tile.pixels = tile.pixels.map((_) => color);
+    };
+
     const sketch: Sketch = (p5) => {
         p5.setup = () => {
             _p5 = p5;
-            p5.createCanvas(50, 50);
+            p5.createCanvas(screenSize, screenSize);
         };
+        let lastClick = 0;
         p5.draw = () => {
-            p5.background(0);
+            tile.pixels.forEach((color, index) => {
+                const x = index % tile.size;
+                const y = Math.floor(index / tile.size);
+                p5.fill(color * 255);
+                p5.rect(x * scale, y * scale, scale, scale);
+            });
+
+            if (p5.mouseIsPressed) {
+                const now = Date.now();
+                if (now - lastClick > 300) {
+                    lastClick = now;
+                    togglePixel(Math.floor(p5.mouseX / scale), Math.floor(p5.mouseY / scale));
+                }
+            }
         };
     };
 
@@ -22,4 +58,6 @@
 
 <div class="d-flex justify-content-center">
     <P5 {sketch} />
+    <button on:click={() => fillPixels(1)}>Fill tile</button>
+    <button on:click={() => fillPixels(0)}>Empty tile</button>
 </div>
