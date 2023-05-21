@@ -1,14 +1,14 @@
 <script>
     import { Tabs, Tab, TabList, TabPanel } from 'svelte-tabs';
-    import Game from '$lib/components/Game.svelte';
+    import TileEditor from '$lib/components/TileEditor.svelte';
 </script>
 
 <Tabs>
     <TabList>
-        <Tab>Game</Tab>
+        <Tab>Tile Editor</Tab>
     </TabList>
 
     <TabPanel>
-        <Game />
+        <TileEditor />
     </TabPanel>
 </Tabs>
