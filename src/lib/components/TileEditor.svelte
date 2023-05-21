@@ -3,6 +3,7 @@
     import P5, { type Sketch } from 'p5-svelte';
     import { onDestroy } from 'svelte';
     import type { Tile } from './types';
+    import TileComponent from './Tile.svelte';
 
     let _p5: p5;
 
@@ -16,7 +17,7 @@
         size: SIZE,
         pixels: new Array(SIZE * SIZE).fill(0).map((n) => (Math.random() < 0.5 ? 0 : 1))
     };
-    const tiles: Tile[] = [];
+    let tiles: Tile[] = [];
 
     const screenSize = 500;
     const scale = screenSize / tile.size;
@@ -33,6 +34,7 @@
             id: tiles.length,
             ...tile
         });
+        tiles = tiles;
     };
 
     const sketch: Sketch = (p5) => {
@@ -64,10 +66,12 @@
     });
 </script>
 
-<div class="d-flex justify-content-center">
-    <P5 {sketch} />
-    <button on:click={() => fillPixels(1)}>Fill tile</button>
-    <button on:click={() => fillPixels(0)}>Empty tile</button>
+<P5 {sketch} />
+<button on:click={() => fillPixels(1)}>Fill tile</button>
+<button on:click={() => fillPixels(0)}>Empty tile</button>
 
-    <button on:click={saveTile}>Save tile</button>
-</div>
+<button on:click={saveTile}>Save tile</button>
+
+{#each tiles as tile}
+    <TileComponent {tile} screenSize={200} />
+{/each}
