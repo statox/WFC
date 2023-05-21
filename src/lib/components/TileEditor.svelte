@@ -15,7 +15,7 @@
     const SIZE = 5;
     const tile: TileTmp = {
         size: SIZE,
-        pixels: new Array(SIZE * SIZE).fill(0).map((n) => (Math.random() < 0.5 ? 0 : 1))
+        pixels: new Array(SIZE * SIZE).fill(0).map((_) => (Math.random() < 0.5 ? 0 : 1))
     };
 
     const screenSize = 500;
@@ -31,8 +31,10 @@
     const saveTile = () => {
         const newTile = {
             id: $tiles.length,
-            ...tile
+            size: tile.size,
+            pixels: [...tile.pixels]
         };
+
         tiles.set([...$tiles, newTile]);
     };
 
@@ -51,8 +53,10 @@
             });
 
             if (p5.mouseIsPressed) {
+                const mouseInScreen =
+                    p5.mouseX > 0 && p5.mouseX < p5.width && p5.mouseY > 0 && p5.mouseY < p5.height;
                 const now = Date.now();
-                if (now - lastClick > 300) {
+                if (mouseInScreen && now - lastClick > 300) {
                     lastClick = now;
                     togglePixel(Math.floor(p5.mouseX / scale), Math.floor(p5.mouseY / scale));
                 }
