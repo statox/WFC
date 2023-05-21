@@ -33,7 +33,4 @@
     });
 </script>
 
-<div>
-    <span>Tile {tile.id}</span>
-    <P5 {sketch} />
-</div>
+<P5 {sketch} />

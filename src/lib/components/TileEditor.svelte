@@ -77,5 +77,8 @@
 
 <button on:click={deleteTiles}>Reset all tiles</button>
 {#each $tiles as tile}
-    <TileComponent {tile} screenSize={200} />
+    <div>
+        <span>Tile {tile.id}</span>
+        <TileComponent {tile} screenSize={200} />
+    </div>
 {/each}
