@@ -2,9 +2,13 @@
     import { connections } from '$lib/connections';
     import { tiles } from '$lib/tiles';
     import TileComponent from './Tile.svelte';
+
+    const getTileIds = () => {
+        return Object.keys($connections).map(Number);
+    };
 </script>
 
-{#each Object.keys($connections) as tileId}
+{#each getTileIds() as tileId}
     {@const tile = $tiles[tileId]}
     <div class="row">
         <TileComponent {tile} />
