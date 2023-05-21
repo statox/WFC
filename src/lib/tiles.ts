@@ -2,7 +2,31 @@ import { writable } from 'svelte/store';
 import type { Tile } from './components/types';
 
 const KEY = 'tiles';
-let tiles = writable<Tile[]>([]);
+
+const defaultTiles = [
+    {
+        id: 0,
+        size: 5,
+        pixels: [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0]
+    },
+    {
+        id: 1,
+        size: 5,
+        pixels: [0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0]
+    },
+    {
+        id: 2,
+        size: 5,
+        pixels: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+        id: 3,
+        size: 5,
+        pixels: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0]
+    }
+];
+
+let tiles = writable<Tile[]>(defaultTiles);
 
 try {
     const storedStr = window.localStorage.getItem(KEY);
@@ -11,11 +35,8 @@ try {
         try {
             tiles = writable<Tile[]>(JSON.parse(storedStr) as Tile[]);
         } catch (e) {
-            console.error('Couldnt load project from local storage');
-            tiles = writable<Tile[]>([]);
+            console.error('Couldnt load local storage');
         }
-    } else {
-        tiles = writable<Tile[]>([]);
     }
 
     tiles.subscribe((value) => {
