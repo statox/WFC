@@ -1,8 +1,8 @@
 <script lang="ts">
+    import { deleteTiles, tiles } from '$lib/tiles';
     import type p5 from 'p5';
     import P5, { type Sketch } from 'p5-svelte';
     import { onDestroy } from 'svelte';
-    import type { Tile } from './types';
     import TileComponent from './Tile.svelte';
 
     let _p5: p5;
@@ -17,7 +17,6 @@
         size: SIZE,
         pixels: new Array(SIZE * SIZE).fill(0).map((n) => (Math.random() < 0.5 ? 0 : 1))
     };
-    let tiles: Tile[] = [];
 
     const screenSize = 500;
     const scale = screenSize / tile.size;
@@ -30,11 +29,11 @@
         tile.pixels = tile.pixels.map((_) => color);
     };
     const saveTile = () => {
-        tiles.push({
-            id: tiles.length,
+        const newTile = {
+            id: $tiles.length,
             ...tile
-        });
-        tiles = tiles;
+        };
+        tiles.set([...$tiles, newTile]);
     };
 
     const sketch: Sketch = (p5) => {
@@ -72,6 +71,7 @@
 
 <button on:click={saveTile}>Save tile</button>
 
-{#each tiles as tile}
+<button on:click={deleteTiles}>Reset all tiles</button>
+{#each $tiles as tile}
     <TileComponent {tile} screenSize={200} />
 {/each}
