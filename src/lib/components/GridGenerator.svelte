@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { tiles } from '$lib/tiles';
-    import type { Tile } from './types';
+    import { tiles } from '$lib/stores/tiles';
+    import type { Tile } from '../types/types';
 
     type Cell =
         | Tile

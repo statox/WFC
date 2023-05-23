@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { Tile } from './components/types';
+import type { Tile } from '../types/types';
 
 const KEY = 'tiles';
 

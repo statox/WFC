@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { deleteTiles, tiles } from '$lib/tiles';
+    import { deleteTiles, tiles } from '$lib/stores/tiles';
     import type p5 from 'p5';
     import P5, { type Sketch } from 'p5-svelte';
     import { onDestroy } from 'svelte';

@@ -1,14 +1,13 @@
 <script lang="ts">
+    import { drawTile } from '$lib/services/tiles';
     import type p5 from 'p5';
     import P5, { type Sketch } from 'p5-svelte';
     import { onDestroy } from 'svelte';
-    import type { Tile } from './types';
+    import type { Tile } from '../types/types';
 
     export let tile: Tile;
     export let screenSize = 100;
     let _p5: p5;
-
-    const scale = screenSize / tile.size;
 
     const sketch: Sketch = (p5) => {
         p5.setup = () => {
@@ -17,12 +16,7 @@
         };
 
         p5.draw = () => {
-            tile.pixels.forEach((color, index) => {
-                const x = index % tile.size;
-                const y = Math.floor(index / tile.size);
-                p5.fill(color * 255);
-                p5.rect(x * scale, y * scale, scale, scale);
-            });
+            drawTile(p5, tile);
 
             p5.noLoop();
         };

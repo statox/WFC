@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import type { Connections } from './components/types';
+import type { Connections } from '../types/types';
 
 const KEY = 'connections';
 
