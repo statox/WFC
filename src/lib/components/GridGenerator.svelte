@@ -1,5 +1,11 @@
 <script lang="ts">
-    import { collapseCell, drawGrid, getNewGrid } from '$lib/services/grid';
+    import {
+        collapseBestCell,
+        drawGrid,
+        getNewGrid,
+        removeImpossibleStates
+    } from '$lib/services/grid';
+    import { connections } from '$lib/stores/connections';
     import { tiles } from '$lib/stores/tiles';
     import type p5 from 'p5';
     import P5, { type Sketch } from 'p5-svelte';
@@ -7,13 +13,12 @@
     import type { Grid } from '../types/types';
 
     const screenSize = 500;
-    const gridSize = 5;
-    const grid: Grid = getNewGrid($tiles, gridSize);
-    collapseCell(grid, { x: 0, y: 0 }, $tiles[0]);
-    collapseCell(grid, { x: 1, y: 1 }, $tiles[1]);
-    collapseCell(grid, { x: 2, y: 2 }, $tiles[2]);
-    collapseCell(grid, { x: 3, y: 3 }, $tiles[3]);
-    collapseCell(grid, { x: 4, y: 4 }, $tiles[4]);
+    const gridSize = 10;
+    let grid: Grid;
+    const reset = () => {
+        grid = getNewGrid($tiles, gridSize);
+        _p5?.loop();
+    };
 
     let _p5: p5;
 
@@ -21,6 +26,7 @@
         p5.setup = () => {
             _p5 = p5;
             p5.createCanvas(screenSize, screenSize);
+            reset();
         };
 
         p5.draw = () => {
@@ -31,6 +37,12 @@
         };
     };
 
+    const step = () => {
+        removeImpossibleStates(grid, $connections);
+        collapseBestCell(grid, $tiles);
+        _p5.loop();
+    };
+
     onDestroy(() => {
         _p5?.remove();
     });
@@ -38,3 +50,5 @@
 
 <h3>Grid generator</h3>
 <P5 {sketch} />
+<button on:click={step}>Step</button>
+<button on:click={reset}>Reset</button>

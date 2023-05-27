@@ -4,6 +4,12 @@ import type { Connections } from '../types/types';
 const KEY = 'connections';
 
 const defaultConnections = {
+    0: {
+        N: [0, 3],
+        E: [0, 1],
+        S: [0, 3],
+        W: [0, 1, 4]
+    },
     1: {
         N: [1, 2, 4],
         E: [0],
