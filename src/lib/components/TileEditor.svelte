@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { drawTile } from '$lib/services/tiles';
     import { deleteTiles, tiles } from '$lib/stores/tiles';
     import type p5 from 'p5';
     import P5, { type Sketch } from 'p5-svelte';
@@ -45,12 +46,7 @@
         };
         let lastClick = 0;
         p5.draw = () => {
-            tile.pixels.forEach((color, index) => {
-                const x = index % tile.size;
-                const y = Math.floor(index / tile.size);
-                p5.fill(color * 255);
-                p5.rect(x * scale, y * scale, scale, scale);
-            });
+            drawTile(p5, { id: -1, ...tile });
 
             if (p5.mouseIsPressed) {
                 const mouseInScreen =
