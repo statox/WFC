@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { drawTileInRect } from '$lib/services/tiles';
     import type p5 from 'p5';
     import P5, { type Sketch } from 'p5-svelte';
     import { onDestroy } from 'svelte';
@@ -21,34 +22,15 @@
         };
 
         p5.draw = () => {
-            const scale = Math.min(p5.width, p5.height) / tile1.size;
+            const size = ['N', 'S'].includes(direction) ? p5.height / 2 : p5.width / 2;
+            const tint1 = ['W', 'N'].includes(direction) ? 200 : 255;
+            drawTileInRect(p5, tile1, { x: 0, y: 0, size }, tint1);
 
-            tile1.pixels.forEach((color, index) => {
-                const x = index % tile1.size;
-                const y = Math.floor(index / tile1.size);
-                if (['W', 'N'].includes(direction)) {
-                    p5.fill(color * 200);
-                } else {
-                    p5.fill(color * 255);
-                }
-                p5.rect(x * scale, y * scale, scale, scale);
-            });
-
-            tile2.pixels.forEach((color, index) => {
-                const x = index % tile1.size;
-                const y = Math.floor(index / tile1.size);
-                if (['W', 'N'].includes(direction)) {
-                    p5.fill(color * 255);
-                } else {
-                    p5.fill(color * 200);
-                }
-
-                if (['W', 'E'].includes(direction)) {
-                    p5.rect((x + tile1.size) * scale, y * scale, scale, scale);
-                } else {
-                    p5.rect(x * scale, (y + tile1.size) * scale, scale, scale);
-                }
-            });
+            const tint2 = ['W', 'N'].includes(direction) ? 255 : 200;
+            const offset = ['N', 'S'].includes(direction)
+                ? { x: 0, y: p5.height / 2 }
+                : { x: p5.width / 2, y: 0 };
+            drawTileInRect(p5, tile2, { ...offset, size }, tint2);
 
             p5.stroke('red');
             if (['W', 'E'].includes(direction)) {

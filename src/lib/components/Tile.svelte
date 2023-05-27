@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { drawTile } from '$lib/services/tiles';
+    import { drawTileInRect } from '$lib/services/tiles';
     import type p5 from 'p5';
     import P5, { type Sketch } from 'p5-svelte';
     import { onDestroy } from 'svelte';
@@ -16,7 +16,7 @@
         };
 
         p5.draw = () => {
-            drawTile(p5, tile);
+            drawTileInRect(p5, tile, { x: 0, y: 0, size: screenSize });
 
             p5.noLoop();
         };
