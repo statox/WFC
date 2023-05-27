@@ -7,11 +7,12 @@ export const drawTileInRect = (
     rect: { x: number; y: number; size: number },
     tint?: number
 ) => {
+    p5.noStroke();
     const scale = rect.size / tile.size;
     tile.pixels.forEach((color, index) => {
         const x = index % tile.size;
         const y = Math.floor(index / tile.size);
         p5.fill(color * (tint || 255));
-        p5.rect(rect.x + x * scale, rect.y + y * scale, rect.size, rect.size);
+        p5.rect(rect.x + x * scale, rect.y + y * scale, scale, scale);
     });
 };
