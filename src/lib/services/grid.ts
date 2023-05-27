@@ -94,10 +94,10 @@ export const drawGrid = (p5: p5, grid: Grid) => {
     p5.stroke(255);
     for (let y = 0; y < grid.length; y++) {
         for (let x = 0; x < grid[0].length; x++) {
-            p5.noFill();
-            p5.stroke(255);
-            p5.rect(x * cellSize, y * cellSize, cellSize, cellSize);
             if (isNotCollapsed(grid[y][x])) {
+                p5.noFill();
+                p5.stroke(255);
+                p5.rect(x * cellSize, y * cellSize, cellSize, cellSize);
                 const text = grid[y][x].possibleTiles.join(',');
                 p5.fill(255);
                 p5.noStroke();

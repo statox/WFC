@@ -14,8 +14,12 @@
 
     const screenSize = 500;
     const gridSize = 10;
+    let prevGrid: Grid;
     let grid: Grid;
+    let error = false;
+
     const reset = () => {
+        error = false;
         grid = getNewGrid($tiles, gridSize);
         _p5?.loop();
     };
@@ -30,17 +34,34 @@
         };
 
         p5.draw = () => {
+            if (error) {
+                return;
+            }
             p5.background(0);
-            drawGrid(p5, grid);
+            try {
+                drawGrid(p5, grid);
+            } catch {
+                drawGrid(p5, prevGrid);
+            }
 
             p5.noLoop();
         };
     };
 
     const step = () => {
+        prevGrid = { ...grid };
         removeImpossibleStates(grid, $connections);
         collapseBestCell(grid, $tiles);
         _p5.loop();
+    };
+
+    const completeProcess = () => {
+        try {
+            step();
+            setTimeout(completeProcess, 10);
+        } catch {
+            error = true;
+        }
     };
 
     onDestroy(() => {
@@ -50,5 +71,9 @@
 
 <h3>Grid generator</h3>
 <P5 {sketch} />
+{#if error}
+    <div>Can't continue collapsing</div>
+{/if}
+<button on:click={completeProcess}>Collapse</button>
 <button on:click={step}>Step</button>
 <button on:click={reset}>Reset</button>
