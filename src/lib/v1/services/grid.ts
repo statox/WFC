@@ -1,5 +1,5 @@
 import type p5 from 'p5';
-import { isNotCollapsed, type Connections, type Grid, type Tile } from '$lib/types/types';
+import { isNotCollapsed, type Connections, type Grid, type Tile } from '$lib/v1/types/types';
 import { drawTileInRect } from './tiles';
 
 export const getNewGrid = (tiles: Tile[], dimension: number) => {

@@ -4,9 +4,9 @@
         drawGrid,
         getNewGrid,
         removeImpossibleStates
-    } from '$lib/services/grid';
-    import { connections } from '$lib/stores/connections';
-    import { tiles } from '$lib/stores/tiles';
+    } from '$lib/v1/services/grid';
+    import { connections } from '$lib/v1/stores/connections';
+    import { tiles } from '$lib/v1/stores/tiles';
     import type p5 from 'p5';
     import P5, { type Sketch } from 'p5-svelte';
     import { onDestroy } from 'svelte';

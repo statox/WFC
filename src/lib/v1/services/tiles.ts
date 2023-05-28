@@ -1,4 +1,4 @@
-import type { Tile } from '$lib/types/types';
+import type { Tile } from '$lib/v1/types/types';
 import type p5 from 'p5';
 
 export const drawTileInRect = (

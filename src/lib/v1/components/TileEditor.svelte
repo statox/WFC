@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { drawTileInRect } from '$lib/services/tiles';
-    import { deleteTiles, tiles } from '$lib/stores/tiles';
+    import { drawTileInRect } from '$lib/v1/services/tiles';
+    import { deleteTiles, tiles } from '$lib/v1/stores/tiles';
     import type p5 from 'p5';
     import P5, { type Sketch } from 'p5-svelte';
     import { onDestroy } from 'svelte';

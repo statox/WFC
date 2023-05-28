@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import type { Connections } from '../types/types';
 
-const KEY = 'connections';
+const KEY = 'v1/connections';
 
 const defaultConnections = {
     0: {

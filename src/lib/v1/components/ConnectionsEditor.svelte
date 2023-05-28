@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { connections } from '$lib/stores/connections';
-    import { tiles } from '$lib/stores/tiles';
+    import { connections } from '$lib/v1/stores/connections';
+    import { tiles } from '$lib/v1/stores/tiles';
     import TileComponent from './Tile.svelte';
     import ConnectionComponent from './Connection.svelte';
 

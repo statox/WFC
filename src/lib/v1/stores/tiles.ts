@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import type { Tile } from '../types/types';
 
-const KEY = 'tiles';
+const KEY = 'v1/tiles';
 
 const defaultTiles = [
     {
