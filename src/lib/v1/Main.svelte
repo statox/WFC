@@ -1,10 +1,12 @@
 <script>
     import { Tabs, Tab, TabList, TabPanel } from 'svelte-tabs';
+    import About from './components/About.svelte';
     import TileEditor from './components/TileEditor.svelte';
     import ConnectionsEditor from './components/ConnectionsEditor.svelte';
     import GridGenerator from './components/GridGenerator.svelte';
 
     const tabs = [
+        { title: 'About', component: About },
         { title: 'Grid', component: GridGenerator },
         { title: 'Tiles', component: TileEditor },
         { title: 'Connections', component: ConnectionsEditor }
