@@ -17,3 +17,9 @@
     "Grid" is my first implementation of WFC. The not collapsed cells display only the id of their
     possible tiles. I haven't implemented backtracking yet so the error handling is crappy.
 </p>
+
+<p>
+    One thing I need to figure out: When removing the impossible state we only considerate the
+    direct neighbors of the collapsed cells. I think doing that recursively (eliminating the states
+    made impossible by the first removals) would make it more interesting.
+</p>

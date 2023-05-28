@@ -1,6 +1,7 @@
 <script lang="ts">
     import {
         collapseBestCell,
+        collapseCell,
         drawGrid,
         getNewGrid,
         removeImpossibleStates
@@ -13,7 +14,7 @@
     import type { Grid } from '../types/types';
 
     const screenSize = 500;
-    const gridSize = 10;
+    let gridSize = 10;
     let prevGrid: Grid;
     let grid: Grid;
     let error = false;
@@ -21,6 +22,18 @@
     const reset = () => {
         error = false;
         grid = getNewGrid($tiles, gridSize);
+        const seededCells = Math.floor(Math.random() * 5);
+        for (let i = 0; i < seededCells; i++) {
+            const randIndex = Math.floor(Math.random() * $tiles.length);
+            collapseCell(
+                grid,
+                {
+                    x: Math.floor(Math.random() * gridSize),
+                    y: Math.floor(Math.random() * gridSize)
+                },
+                $tiles[randIndex]
+            );
+        }
         _p5?.loop();
     };
 
@@ -58,9 +71,22 @@
     const completeProcess = () => {
         try {
             step();
-            setTimeout(completeProcess, 10);
+            setTimeout(completeProcess, 1);
         } catch {
             error = true;
+        }
+    };
+
+    const infiniteProcess = () => {
+        try {
+            step();
+            setTimeout(infiniteProcess, 1);
+        } catch {
+            error = true;
+            setTimeout(() => {
+                reset();
+                infiniteProcess();
+            }, 1000);
         }
     };
 
@@ -74,6 +100,10 @@
 {#if error}
     <div>Can't continue collapsing</div>
 {/if}
+<button on:click={infiniteProcess}>Infinite generation</button>
 <button on:click={completeProcess}>Collapse</button>
 <button on:click={step}>Step</button>
 <button on:click={reset}>Reset</button>
+
+<label for="gridSize">Grid Size</label>
+<input type="number" bind:value={gridSize} on:change={reset} min="2" />
