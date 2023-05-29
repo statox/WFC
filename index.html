@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.png" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <meta http-equiv="content-security-policy" content="">
+		<link href="./_app/immutable/assets/_layout-2d7f1649.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/_page-b8b655dd.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/start-243f807b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-ef051809.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/singletons-12243e70.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index-2a3dddd5.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/preload-helper-41c905a7.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/_layout.svelte-2cb3a4e7.js">
+		<link rel="modulepreload" href="./_app/immutable/modules/pages/_layout.js-9cbb603b.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/_layout-da46b06b.js">
+		<link rel="modulepreload" href="./_app/immutable/components/pages/_page.svelte-f0056e6a.js">
+</head>
+
+<body data-sveltekit-preload-data="hover">
+    <div style="display: contents">
+
+
+<header><h1>Wave function collapse</h1>
+
+    <nav><a href="/">Home</a> |
+    </nav></header>
+
+<div class="svelte-tabs"><ul role="tablist" class="svelte-tabs__tab-list svelte-12yby2a"><li role="tab" id="svelte-tabs-1" aria-selected="true" tabindex="0" class="svelte-tabs__tab svelte-1fbofsd svelte-tabs__selected">V1</li></ul>
+
+    <div id="svelte-tabs-2" class="svelte-tabs__tab-panel svelte-epfyet" role="tabpanel"><div class="svelte-tabs"><ul role="tablist" class="svelte-tabs__tab-list svelte-12yby2a"><li role="tab" id="svelte-tabs-3" aria-selected="true" tabindex="0" class="svelte-tabs__tab svelte-1fbofsd svelte-tabs__selected">About</li><li role="tab" id="svelte-tabs-4" aria-selected="false" tabindex="-1" class="svelte-tabs__tab svelte-1fbofsd">Grid</li><li role="tab" id="svelte-tabs-5" aria-selected="false" tabindex="-1" class="svelte-tabs__tab svelte-1fbofsd">Tiles</li><li role="tab" id="svelte-tabs-6" aria-selected="false" tabindex="-1" class="svelte-tabs__tab svelte-1fbofsd">Connections</li></ul>
+
+    <div id="svelte-tabs-7" class="svelte-tabs__tab-panel svelte-epfyet" role="tabpanel"><h2>V1</h2>
+
+<p>A very first exploration of Wave function collapse</p>
+
+<p>&quot;Tiles&quot; allows to create new tiles and save them to the local storage. For now the sprites are
+    saved as arrays of 0 and 1 to describe black and white pixels. This is not convenient, I want to
+    be able to save sprites as images directly
+</p>
+
+<p>&quot;Connections&quot; display the hard coded connections. For now there is now way to edit them but they
+    are still retrieved from the local storage after the first run.
+</p>
+
+<p>&quot;Grid&quot; is my first implementation of WFC. The not collapsed cells display only the id of their
+    possible tiles. I haven&#39;t implemented backtracking yet so the error handling is crappy.
+</p>
+
+<p>One thing I need to figure out: When removing the impossible state we only considerate the
+    direct neighbors of the collapsed cells. I think doing that recursively (eliminating the states
+    made impossible by the first removals) would make it more interesting.
+</p>
+        </div><div id="svelte-tabs-8" class="svelte-tabs__tab-panel svelte-epfyet" role="tabpanel"></div><div id="svelte-tabs-9" class="svelte-tabs__tab-panel svelte-epfyet" role="tabpanel"></div><div id="svelte-tabs-10" class="svelte-tabs__tab-panel svelte-epfyet" role="tabpanel"></div></div>
+        </div></div>
+
+
+		<script type="module" data-sveltekit-hydrate="1ijlvb6">
+			import { start } from "./_app/immutable/start-243f807b.js";
+
+			start({
+				env: {},
+				paths: {"base":"","assets":""},
+				target: document.querySelector('[data-sveltekit-hydrate="1ijlvb6"]').parentNode,
+				version: "1685392311981",
+				hydrate: {
+					node_ids: [0, 2],
+					data: [null,null],
+					form: null
+				}
+			});
+		</script>
+	</div>
+</body>
+
+<!-- Override newcss -->
+<style>
+    body {
+        max-width: 900px;
+    }
+
+    :root {
+        --nc-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        --nc-font-mono: Consolas, monaco, 'Ubuntu Mono', 'Liberation Mono', 'Courier New', Courier, monospace;
+        --is-light-theme: 1;
+
+
+        /* Dark theme */
+        --nc-tx-1: #FFFFFF;
+        --nc-tx-2: #B7B7B7;
+        --nc-tx-3: #8a8d87;
+        --nc-bg-1: #1E272C;
+        --nc-bg-2: #161d21;
+        --nc-bg-3: #263238;
+        --nc-lk-1: #5E92FF;
+        --nc-lk-2: #99b2e8;
+        --nc-lk-tx: #2E3C43;
+        --nc-ac-1: #C3E88D;
+        --nc-ac-tx: #263238;
+    }
+</style>
+
+</html>
